@@ -1,0 +1,29 @@
+@mixin button($w: 50px, $h: calc($w / 2), $br: 0px, $bg: white, $c: black) {
+    width: $w;
+    height: $h;
+    background-color: $bg;
+    color: $c;
+    border-radius: $br;
+    cursor: pointer;
+}
+
+@mixin dimensions($w: 100px, $h: $w, $br: 0px, $bg: #1d1d1e) {
+    width: $w;
+    height: $h;
+    border-radius: $br;
+    background-color: $bg;
+}
+
+@mixin circle($w: 100px, $bg: #1d1d1e) {
+    width: $w;
+    height: $w;
+    border-radius: 50%;
+    background-color: $bg;
+}
+
+@mixin flex($justify: center, $align: center, $dir: column) {
+    display: flex;
+    justify-content: $justify;
+    align-items: $align;
+    flex-direction: $dir;
+}
