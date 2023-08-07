@@ -86,7 +86,8 @@ body {
   position: absolute;
   top: 250px;
   right: 340px;
-  background-image: url(../../utils/images/summer_nights.gif);
+  background-image: url("../../utils/images/walpiper.png");
+  background-size: 350%;
   background-position: 50% 100%;
   transform: scale(1.6);
 }
