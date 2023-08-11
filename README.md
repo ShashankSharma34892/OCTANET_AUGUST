@@ -1,2 +1,10 @@
 # OCTANET_AUGUST
-An Ugly Landing Page!
+
+`Task 1:` <br>
+Create a Landing Page <br><br>
+
+`Task 2:` <br>
+Create a TODO List <br><br>
+
+
+
