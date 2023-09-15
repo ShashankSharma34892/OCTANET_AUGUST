@@ -1,0 +1,144 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+  font-style: normal;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  font-family: "Spinnaker", "Albert Sans", "Roboto Mono", "Inconsolata";
+  font-size: 1.4rem;
+  letter-spacing: 0.7px;
+  line-height: 1.8rem;
+}
+
+body {
+  font-family: "Inconsolata";
+  background-color: whitesmoke;
+  letter-spacing: 1px;
+  user-select: none;
+}
+
+.daddy_wrapper {
+  width: 90%;
+  height: 90%;
+  border-radius: 0px;
+  position: relative;
+  top: 10%;
+  left: 5%;
+}
+.daddy_wrapper h1.main_heading {
+  margin: 0px 150px 30px;
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: rebeccapurple;
+}
+
+.todolist_wrapper {
+  width: 90%;
+  height: 90%;
+  border-radius: 0px;
+  position: absolute;
+  left: 5%;
+}
+.todolist_wrapper li {
+  display: block;
+  margin-left: 50px;
+  margin-right: 50px;
+  border-top: solid 2.5px rgba(128, 128, 128, 0.1);
+  font-size: 0;
+  font-weight: 900;
+}
+.todolist_wrapper li span {
+  display: inline-block;
+  height: 40px;
+  border-right: solid 2.5px rgba(128, 128, 128, 0.1);
+  font-size: 20px;
+  text-align: left;
+  vertical-align: middle;
+}
+.todolist_wrapper li span.status {
+  width: 7%;
+  background-image: url("/img/pending1.png");
+  background-size: 25px;
+  background-repeat: no-repeat;
+  background-position: calc(100% - 15px);
+}
+.todolist_wrapper li span:not(.status) {
+  padding: 10px 10px 10px;
+  user-select: text;
+}
+.todolist_wrapper li span.due_date {
+  width: 23%;
+}
+.todolist_wrapper li span.task_name {
+  width: 69.8%;
+}
+.todolist_wrapper li.list_heading {
+  color: gray;
+  font-weight: 900;
+}
+.todolist_wrapper li.list_heading .status {
+  border-left: solid 2.5px rgba(128, 128, 128, 0.1);
+  background-image: url("/img/checklist1.png");
+  background-size: 30px;
+  background-position-x: calc(100% - 14px);
+}
+.todolist_wrapper li:hover .edit {
+  display: inline-block;
+}
+.todolist_wrapper li button {
+  padding: 5px;
+  border: solid 2px rgba(113, 37, 188, 0.8);
+  border-radius: 5px;
+  cursor: pointer;
+}
+.todolist_wrapper li button img {
+  width: 18px;
+  height: 18px;
+  border-radius: 0px;
+  display: block;
+}
+.todolist_wrapper li button:hover {
+  background-color: rgba(160, 43, 249, 0.3);
+}
+.todolist_wrapper li .edit {
+  display: none;
+  position: absolute;
+  left: -40px;
+  margin-top: -7px;
+  border: none;
+  padding: 0;
+}
+.todolist_wrapper #get_input {
+  border-bottom: solid 2.5px rgba(128, 128, 128, 0.1);
+  padding-bottom: 5px;
+  font-size: 20px;
+  text-align: center;
+}
+.todolist_wrapper #get_input span {
+  border: none;
+  transition: transform 0.3s ease;
+}
+.todolist_wrapper #get_input:hover span {
+  transform: scale(1.3);
+}
+.todolist_wrapper input {
+  width: 90%;
+  margin-top: -5px;
+  border-radius: 3px;
+  padding: 5px;
+  font-family: inherit;
+  font-size: 1.5rem;
+  font-weight: 900;
+  background-color: transparent;
+  letter-spacing: inherit;
+}
+.todolist_wrapper input:focus {
+  outline: solid 1px rgba(102, 51, 153, 0.4);
+}

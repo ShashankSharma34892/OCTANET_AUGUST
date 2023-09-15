@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" href="/img/Transparent_white_O.png">
+
+    <link rel="stylesheet" href="../css/todo_list.css">
+
+    <script defer src="/js/todolist.js"></script>
+
+    <title>TODO List</title>
+</head>
+
+<body>
+    <div class="daddy_wrapper">
+        <h1 class="main_heading">Tasks</h1>
+
+        <div class="todolist_wrapper">
+            <ul id="todolist">
+                <li class="list_heading">
+                    <span class="status"
+                        title="Status"></span>
+                    <span class="task_name">Task Name</span>
+                    <span class="due_date">Due</span>
+                </li>
+            </ul>
+
+            <ul id="add_item">
+                <li id="get_input"
+                    onclick="getInput()">
+                    <span>➕</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>
