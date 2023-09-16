@@ -6,8 +6,8 @@ let item_count = document.querySelectorAll("#todolist li").length - 1,
 
 console.debug("item_count = ", item_count);
 
-const statuses = [
-	"/img/workinprogress.png",
+const posibl_status = [
+	"/img/wipi1.png",
 	"/img/done1.png",
 	"/img/pending1.png",
 ];
@@ -60,7 +60,7 @@ function addItemToList() {
 	localStorage.setItem(
 		item_count,
 		JSON.stringify([
-			statuses[status_count % 3],
+			posibl_status[status_count % 3],
 			inputs[0].value,
 			inputs[1].value,
 		])
@@ -121,7 +121,7 @@ function updateItemInList(item_no, task_name) {
 	localStorage.setItem(
 		item_no,
 		JSON.stringify([
-			statuses[status_count % 3],
+			posibl_status[status_count % 3],
 			inputs[0].value,
 			inputs[1].value,
 		])
@@ -137,7 +137,7 @@ function changeStatusOfItem(item_no) {
 	const status = document.querySelector(`.item_${item_no} .status`);
 	const task = document.querySelector(`.item_${item_no} .task_name`);
 
-	status.style.backgroundImage = `url(${statuses[status_count++ % 3]})`;
+	status.style.backgroundImage = `url(${posibl_status[status_count++ % 3]})`;
 
 	if (status_count % 3 === 2) task.style.textDecoration = "line-through";
 	else task.style.textDecoration = "none";
@@ -145,7 +145,7 @@ function changeStatusOfItem(item_no) {
 	let string_arr = localStorage.item_no;
 	let arr = JSON.parse(string_arr);
 
-	arr[0] = statuses[status_count % 3];
+	arr[0] = posibl_status[status_count % 3];
 	localStorage.setItem(item_no, JSON.stringify([arr]));
 }
 

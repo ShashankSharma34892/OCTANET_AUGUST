@@ -1,0 +1,86 @@
+@use "partials" as *;
+// @use "../../.utils/scss/base/outline";
+
+
+body {
+    font-family: "Albert Sans";
+    font-size: 1rem;
+    background-color: whitesmoke;
+    letter-spacing: 1px;
+    user-select: text;
+}
+
+input {
+    width: 90%;
+    outline: solid 1px rebeccapurple;
+    border-radius: 3px;
+    padding: 5px;
+
+    background-color: transparent;
+    font: inherit;
+}
+
+.daddy-wrapper {
+    @include flex($justify: space-between, $align: flex-start);
+    $w: 75%;
+
+    width: $w;
+    position: fixed;
+    top: 3rem;
+    left: 50% - $w/2;
+    gap: 2rem;
+}
+
+.main-heading {
+    color: rgb(66, 3, 129);
+}
+
+.todolist-wrapper {
+    @include dim(100%, 100%);
+
+    display: grid;
+    grid-template-columns: .3fr 3fr 1fr;
+    font-weight: 500;
+
+    .column {
+        &:first-child {
+            border-left: solid 3.5px rgba(grey, 0.25);
+        }
+    }
+
+    li {
+        @include flex();
+        @include dim(100%, 30px);
+        border-top: solid 3.5px rgba(grey, 0.2);
+        border-right: solid 3.5px rgba(grey, 0.2);
+        height: 3rem;
+        text-align: left;
+        vertical-align: middle;
+
+        img {
+            @include dim(75%, 75%);
+            object-fit: contain;
+        }
+
+        &.plus {
+            border-bottom: solid 3.5px rgba(grey, 0.25);
+        }
+
+        &.heading {
+            font-weight: 900;
+            color: grey;
+        }
+
+        &:not(.stat_img) {
+            padding: 0px 15px;
+        }
+
+        &:not(.swap):not(.stat_img) {
+            align-items: flex-start;
+        }
+
+        &.swap:hover {
+            font-size: 1.2rem;
+        }
+    }
+}

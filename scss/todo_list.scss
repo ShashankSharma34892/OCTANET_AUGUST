@@ -5,10 +5,11 @@
 $dims: 100% - 10%;
 
 body {
-    font-family: "Inconsolata";
+    font-family: "Albert Sans";
     background-color: whitesmoke;
     letter-spacing: 1px;
     user-select: none;
+    
 }
 
 .daddy_wrapper {
@@ -20,7 +21,6 @@ body {
     h1.main_heading {
         margin: 0px 150px 30px;
         font-size: 2.5rem;
-        font-weight: 900;
         color: rebeccapurple;
     }
 }
@@ -38,9 +38,7 @@ body {
         margin-left: 50px;
         margin-right: 50px;
         border-top: $border;
-
         font-size: 0;
-        font-weight: 900;
 
         span {
             display: inline-block;
@@ -48,6 +46,7 @@ body {
             border-right: $border;
 
             font-size: 20px;
+            font-weight: 500;
             text-align: left;
             vertical-align: middle;
 
@@ -75,7 +74,7 @@ body {
 
         &.list_heading {
             color: gray;
-            // color: rebeccapurple;
+            height: 50px;
             font-weight: 900;
 
             .status {
@@ -145,7 +144,6 @@ body {
 
         font-family: inherit;
         font-size: 1.5rem;
-        font-weight: 900;
         background-color: transparent;
         letter-spacing: inherit;
 

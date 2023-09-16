@@ -5,13 +5,13 @@
     flex-direction: $dir;
 }
 
-@mixin dimensions($w: 100px, $h: $w, $br: 0px) {
+@mixin dim($w: 100px, $h: 100px, $br: 0px) {
     width: $w;
     height: $h;
     border-radius: $br;
 }
 
-@mixin button($w: 50px, $h: calc($w / 2), $br: 0px, $bg: white, $c: black) {
+@mixin button($w: 50px, $h: 100px, $br: 0px, $bg: white, $c: black) {
     width: $w;
     height: $h;
     background-color: $bg;

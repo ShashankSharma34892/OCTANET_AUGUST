@@ -11,14 +11,10 @@
 body {
   width: 100vw;
   height: 100vh;
-  font-family: "Spinnaker", "Albert Sans", "Roboto Mono", "Inconsolata";
-  font-size: 1.4rem;
-  letter-spacing: 0.7px;
-  line-height: 1.8rem;
 }
 
 body {
-  font-family: "Inconsolata";
+  font-family: "Albert Sans";
   background-color: whitesmoke;
   letter-spacing: 1px;
   user-select: none;
@@ -26,7 +22,7 @@ body {
 
 .daddy_wrapper {
   width: 90%;
-  height: 90%;
+  height: 100px;
   border-radius: 0px;
   position: relative;
   top: 10%;
@@ -35,13 +31,12 @@ body {
 .daddy_wrapper h1.main_heading {
   margin: 0px 150px 30px;
   font-size: 2.5rem;
-  font-weight: 900;
   color: rebeccapurple;
 }
 
 .todolist_wrapper {
   width: 90%;
-  height: 90%;
+  height: 100px;
   border-radius: 0px;
   position: absolute;
   left: 5%;
@@ -52,13 +47,13 @@ body {
   margin-right: 50px;
   border-top: solid 2.5px rgba(128, 128, 128, 0.1);
   font-size: 0;
-  font-weight: 900;
 }
 .todolist_wrapper li span {
   display: inline-block;
   height: 40px;
   border-right: solid 2.5px rgba(128, 128, 128, 0.1);
   font-size: 20px;
+  font-weight: 500;
   text-align: left;
   vertical-align: middle;
 }
@@ -81,6 +76,7 @@ body {
 }
 .todolist_wrapper li.list_heading {
   color: gray;
+  height: 50px;
   font-weight: 900;
 }
 .todolist_wrapper li.list_heading .status {
@@ -100,7 +96,7 @@ body {
 }
 .todolist_wrapper li button img {
   width: 18px;
-  height: 18px;
+  height: 100px;
   border-radius: 0px;
   display: block;
 }
@@ -135,7 +131,6 @@ body {
   padding: 5px;
   font-family: inherit;
   font-size: 1.5rem;
-  font-weight: 900;
   background-color: transparent;
   letter-spacing: inherit;
 }

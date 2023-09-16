@@ -1,5 +1,11 @@
 @use "partials" as *;
 
+body {
+    font-family: "Spinnaker", "Albert Sans", "Roboto Mono", "Inconsolata";
+    font-size: 1.4rem;
+    letter-spacing: .7px;
+    line-height: 1.8rem;
+}
 
 button {
     &.learn_more {
@@ -95,7 +101,7 @@ button {
             border: solid 3px rgb(68, 0, 145);
             border-radius: 7px;
             padding: 9rem 3rem;
-            
+
             // background: url(../grainy.svg);
             background: transparent;
             backdrop-filter: blur(20px);

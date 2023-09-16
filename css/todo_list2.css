@@ -1,0 +1,95 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+  font-style: normal;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+}
+
+body {
+  font-family: "Albert Sans";
+  font-size: 1rem;
+  background-color: whitesmoke;
+  letter-spacing: 1px;
+  user-select: text;
+}
+
+input {
+  width: 90%;
+  outline: solid 1px rebeccapurple;
+  border-radius: 3px;
+  padding: 5px;
+  background-color: transparent;
+  font: inherit;
+}
+
+.daddy-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-direction: column;
+  width: 75%;
+  position: fixed;
+  top: 3rem;
+  left: 12.5%;
+  gap: 2rem;
+}
+
+.main-heading {
+  color: rgb(66, 3, 129);
+}
+
+.todolist-wrapper {
+  width: 100%;
+  height: 100%;
+  border-radius: 0px;
+  display: grid;
+  grid-template-columns: 0.3fr 3fr 1fr;
+  font-weight: 500;
+}
+.todolist-wrapper .column:first-child {
+  border-left: solid 3.5px rgba(128, 128, 128, 0.25);
+}
+.todolist-wrapper li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: 30px;
+  border-radius: 0px;
+  border-top: solid 3.5px rgba(128, 128, 128, 0.2);
+  border-right: solid 3.5px rgba(128, 128, 128, 0.2);
+  height: 3rem;
+  text-align: left;
+  vertical-align: middle;
+}
+.todolist-wrapper li img {
+  width: 75%;
+  height: 75%;
+  border-radius: 0px;
+  object-fit: contain;
+}
+.todolist-wrapper li.plus {
+  border-bottom: solid 3.5px rgba(128, 128, 128, 0.25);
+}
+.todolist-wrapper li.heading {
+  font-weight: 900;
+  color: grey;
+}
+.todolist-wrapper li:not(.stat_img) {
+  padding: 0px 15px;
+}
+.todolist-wrapper li:not(.swap):not(.stat_img) {
+  align-items: flex-start;
+}
+.todolist-wrapper li.swap:hover {
+  font-size: 1.2rem;
+}
