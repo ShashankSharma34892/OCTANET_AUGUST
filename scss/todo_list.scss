@@ -2,154 +2,125 @@
 // @use "../../.utils/scss/base/outline";
 
 
-$dims: 100% - 10%;
-
 body {
     font-family: "Albert Sans";
+    font-size: 1rem;
     background-color: whitesmoke;
     letter-spacing: 1px;
-    user-select: none;
-    
+    user-select: text;
 }
 
-.daddy_wrapper {
-    @include dimensions($dims);
-    position: relative;
-    top: 10%;
-    left: 5%;
+button {
+    @include dim(35px, 35px);
+    border: solid 2px rgba(rgb(113, 37, 188), 0.4);
+    border-radius: 5px;
+    padding: 6px 5px 5px;
+    cursor: pointer;
 
-    h1.main_heading {
-        margin: 0px 150px 30px;
-        font-size: 2.5rem;
-        color: rebeccapurple;
+    img {
+        @include dim(20px, 20px);
+    }
+
+    &:hover {
+        background-color: rgba(160, 43, 249, 0.3);
+    }
+
+    &:active {
+        background-color: rgba(160, 43, 249, 0.8);
     }
 }
 
+input {
+    width: 90%;
+    outline: solid 1px rebeccapurple;
+    border-radius: 3px;
+    padding: 5px;
 
-.todolist_wrapper {
-    $border: solid 2.5px rgba(gray, 0.1);
+    background-color: transparent;
+    font: inherit;
+}
 
-    @include dimensions($dims);
-    position: absolute;
-    left: 5%;
+.daddy-wrapper {
+    @include flex($justify: space-between, $align: flex-start);
+    $w: 80%;
+
+    width: $w;
+    position: fixed;
+    top: 3rem;
+    left: 6%;
+    // left: 50% - $w/2;
+    gap: 2rem;
+
+    .main-heading {
+        padding-left: 16%;
+        color: rgb(66, 3, 129);
+    }
+}
+
+.todolist-wrapper {
+    @include dim(100%, 100%);
+    display: grid;
+    grid-template-columns: .5fr .5fr 3fr 1.5fr;
+    font-weight: 500;
+
+    ul:not(:first-child) li {
+        border-top: solid 3.5px rgba(grey, 0.2);
+        border-left: solid 3.5px rgba(grey, 0.2);
+
+        &:last-child {
+            border-bottom: solid 3.5px rgba(grey, 0.25);
+        }
+    }
+
+    ul:last-child {
+        border-right: solid 3.5px rgba(grey, 0.2);
+    }
 
     li {
-        display: block;
-        margin-left: 50px;
-        margin-right: 50px;
-        border-top: $border;
-        font-size: 0;
+        @include flex();
+        @include dim(100%, 30px);
+        height: 3rem;
 
-        span {
-            display: inline-block;
-            height: 40px;
-            border-right: $border;
-
-            font-size: 20px;
-            font-weight: 500;
-            text-align: left;
-            vertical-align: middle;
-
-            &.status {
-                width: 7%;
-                background-image: url("/img/pending1.png");
-                background-size: 25px;
-                background-repeat: no-repeat;
-                background-position: calc(100% - 15px);
-            }
-
-            &:not(.status) {
-                padding: 10px 10px 10px;
-                user-select: text;
-            }
-
-            &.due_date {
-                width: 23%;
-            }
-
-            &.task_name {
-                width: 69.8%;
-            }
+        &.butt {
+            flex-direction: row;
         }
 
-        &.list_heading {
-            color: gray;
-            height: 50px;
+        &.heading {
             font-weight: 900;
-
-            .status {
-                border-left: $border;
-                background-image: url("/img/checklist1.png");
-                background-size: 30px;
-                background-position-x: calc(100% - 14px);
-            }
+            color: grey;
         }
 
-        &:hover {
-            .edit {
-                display: inline-block;
-            }
-        }
-
-        button {
-            padding: 5px;
-            border: solid 2px rgba(rgb(113, 37, 188), 0.8);
-            border-radius: 5px;
+        &.stat_img {
             cursor: pointer;
 
             img {
-                @include dimensions(18px);
-                display: block;
-            }
-
-            &:hover {
-                background-color: rgba(160, 43, 249, 0.3);
+                @include dim(55%, 55%);
+                object-fit: contain;
             }
         }
 
-        .edit {
-            display: none;
-            position: absolute;
-            left: -40px;
-            margin-top: -7px;
-            border: none;
-            padding: 0;
+        &:not(.stat_img) {
+            padding: 0px 15px;
+        }
+
+        &.plus[onclick]:hover {
+            font-size: 1.2rem;
+        }
+
+        &:not(.plus[onclick]):not(.stat_img):not(.butt) {
+            align-items: flex-start;
+        }
+
+        &.butt {
+            align-items: center;
+            gap: 8px;
+            opacity: 0;
+            transition: opacity .2s ease;
+        }
+
+        &.iAmWhatTheyCallLegallyBlind {
+            opacity: 1;
+            transition: opacity .6s ease;
         }
     }
-
-    #get_input {
-        border-bottom: $border;
-        padding-bottom: 5px;
-
-        font-size: 20px;
-        text-align: center;
-
-        span {
-            border: none;
-            transition: transform .3s ease;
-        }
-
-        &:hover {
-            span {
-                transform: scale(1.3);
-            }
-        }
-    }
-
-    input {
-        width: 90%;
-        margin-top: -5px;
-        border-radius: 3px;
-        padding: 5px;
-
-        font-family: inherit;
-        font-size: 1.5rem;
-        background-color: transparent;
-        letter-spacing: inherit;
-
-        &:focus {
-            outline: solid 1px rgba(102, 51, 153, 0.4);
-        }
-    }
-
 }
