@@ -10,6 +10,26 @@ body {
     user-select: text;
 }
 
+button {
+    @include dim(35px, 35px);
+    border: solid 2px rgba(rgb(113, 37, 188), 0.4);
+    border-radius: 5px;
+    padding: 6px 5px 5px;
+    cursor: pointer;
+
+    img {
+        @include dim(20px, 20px);
+    }
+
+    &:hover {
+        background-color: rgba(160, 43, 249, 0.3);
+    }
+
+    &:active {
+        background-color: rgba(160, 43, 249, 0.8);
+    }
+}
+
 input {
     width: 90%;
     outline: solid 1px rebeccapurple;
@@ -22,48 +42,47 @@ input {
 
 .daddy-wrapper {
     @include flex($justify: space-between, $align: flex-start);
-    $w: 75%;
+    $w: 80%;
 
     width: $w;
     position: fixed;
     top: 3rem;
-    left: 50% - $w/2;
+    left: 6%;
+    // left: 50% - $w/2;
     gap: 2rem;
-}
 
-.main-heading {
-    color: rgb(66, 3, 129);
+    .main-heading {
+        padding-left: 16%;
+        color: rgb(66, 3, 129);
+    }
 }
 
 .todolist-wrapper {
     @include dim(100%, 100%);
-
     display: grid;
-    grid-template-columns: .3fr 3fr 1fr;
+    grid-template-columns: .5fr .5fr 3fr 1.5fr;
     font-weight: 500;
 
-    .column {
-        &:first-child {
-            border-left: solid 3.5px rgba(grey, 0.25);
+    ul:not(:first-child) li {
+        border-top: solid 3.5px rgba(grey, 0.2);
+        border-left: solid 3.5px rgba(grey, 0.2);
+
+        &:last-child {
+            border-bottom: solid 3.5px rgba(grey, 0.25);
         }
+    }
+
+    ul:last-child {
+        border-right: solid 3.5px rgba(grey, 0.2);
     }
 
     li {
         @include flex();
         @include dim(100%, 30px);
-        border-top: solid 3.5px rgba(grey, 0.2);
-        border-right: solid 3.5px rgba(grey, 0.2);
         height: 3rem;
-        text-align: left;
-        vertical-align: middle;
 
-        img {
-            @include dim(75%, 75%);
-            object-fit: contain;
-        }
-
-        &.plus {
-            border-bottom: solid 3.5px rgba(grey, 0.25);
+        &.butt {
+            flex-direction: row;
         }
 
         &.heading {
@@ -71,16 +90,35 @@ input {
             color: grey;
         }
 
+        &.stat_img {
+            cursor: pointer;
+
+            img {
+                @include dim(55%, 55%);
+                object-fit: contain;
+            }
+        }
+
         &:not(.stat_img) {
             padding: 0px 15px;
         }
 
-        &:not(.swap):not(.stat_img) {
+        &.plus[onclick]:hover {
+            font-size: 1.2rem;
+        }
+
+        &:not(.plus[onclick]):not(.stat_img):not(.butt) {
             align-items: flex-start;
         }
 
-        &.swap:hover {
-            font-size: 1.2rem;
+        &.butt {
+            align-items: center;
+            gap: 8px;
+            opacity: 0;
+        }
+
+        &.iAmWhatTheyCallLegallyBlind {
+            opacity: 1;
         }
     }
 }

@@ -21,6 +21,27 @@ body {
   user-select: text;
 }
 
+button {
+  width: 35px;
+  height: 35px;
+  border-radius: 0px;
+  border: solid 2px rgba(113, 37, 188, 0.4);
+  border-radius: 5px;
+  padding: 6px 5px 5px;
+  cursor: pointer;
+}
+button img {
+  width: 20px;
+  height: 20px;
+  border-radius: 0px;
+}
+button:hover {
+  background-color: rgba(160, 43, 249, 0.3);
+}
+button:active {
+  background-color: rgba(160, 43, 249, 0.8);
+}
+
 input {
   width: 90%;
   outline: solid 1px rebeccapurple;
@@ -35,14 +56,14 @@ input {
   justify-content: space-between;
   align-items: flex-start;
   flex-direction: column;
-  width: 75%;
+  width: 80%;
   position: fixed;
   top: 3rem;
-  left: 12.5%;
+  left: 6%;
   gap: 2rem;
 }
-
-.main-heading {
+.daddy-wrapper .main-heading {
+  padding-left: 16%;
   color: rgb(66, 3, 129);
 }
 
@@ -51,11 +72,18 @@ input {
   height: 100%;
   border-radius: 0px;
   display: grid;
-  grid-template-columns: 0.3fr 3fr 1fr;
+  grid-template-columns: 0.5fr 0.5fr 3fr 1.5fr;
   font-weight: 500;
 }
-.todolist-wrapper .column:first-child {
-  border-left: solid 3.5px rgba(128, 128, 128, 0.25);
+.todolist-wrapper ul:not(:first-child) li {
+  border-top: solid 3.5px rgba(128, 128, 128, 0.2);
+  border-left: solid 3.5px rgba(128, 128, 128, 0.2);
+}
+.todolist-wrapper ul:not(:first-child) li:last-child {
+  border-bottom: solid 3.5px rgba(128, 128, 128, 0.25);
+}
+.todolist-wrapper ul:last-child {
+  border-right: solid 3.5px rgba(128, 128, 128, 0.2);
 }
 .todolist-wrapper li {
   display: flex;
@@ -65,31 +93,38 @@ input {
   width: 100%;
   height: 30px;
   border-radius: 0px;
-  border-top: solid 3.5px rgba(128, 128, 128, 0.2);
-  border-right: solid 3.5px rgba(128, 128, 128, 0.2);
   height: 3rem;
-  text-align: left;
-  vertical-align: middle;
 }
-.todolist-wrapper li img {
-  width: 75%;
-  height: 75%;
-  border-radius: 0px;
-  object-fit: contain;
-}
-.todolist-wrapper li.plus {
-  border-bottom: solid 3.5px rgba(128, 128, 128, 0.25);
+.todolist-wrapper li.butt {
+  flex-direction: row;
 }
 .todolist-wrapper li.heading {
   font-weight: 900;
   color: grey;
 }
+.todolist-wrapper li.stat_img {
+  cursor: pointer;
+}
+.todolist-wrapper li.stat_img img {
+  width: 55%;
+  height: 55%;
+  border-radius: 0px;
+  object-fit: contain;
+}
 .todolist-wrapper li:not(.stat_img) {
   padding: 0px 15px;
 }
-.todolist-wrapper li:not(.swap):not(.stat_img) {
+.todolist-wrapper li.plus[onclick]:hover {
+  font-size: 1.2rem;
+}
+.todolist-wrapper li:not(.plus[onclick]):not(.stat_img):not(.butt) {
   align-items: flex-start;
 }
-.todolist-wrapper li.swap:hover {
-  font-size: 1.2rem;
+.todolist-wrapper li.butt {
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+}
+.todolist-wrapper li.iAmWhatTheyCallLegallyBlind {
+  opacity: 1;
 }

@@ -1,193 +1,263 @@
-const posibl_status = ["/img/pending1.png", "/img/wipi1.png", "/img/done1.png"];
-const status_alt = ["Pending", "In Progess", "Completed"];
+const img_srcs = ["/img/pending.png", "/img/wipi1.png", "/img/done2.png"];
+const status_alt = ["Not Started", "In Progess", "Completed"];
 
-let list_item_count = document.querySelectorAll(".column .item").length / 3,
-	curr_status = 0;
-
-console.debug("list_item_count = ", list_item_count);
+let list_item_count = 0;
 
 function getInput() {
-	const add_task = document.querySelector(".taskname .plus");
-	const add_due_date = document.querySelector(".duedate .plus");
+	const taskname = document.querySelector(".taskname .plus");
+	const duedate = document.querySelector(".duedate .plus");
 
-	add_task.innerHTML = `<input type="text" />`;
-	add_due_date.innerHTML = `<input onblur=addItemToList() type="text" />`;
+	taskname.innerHTML = `<input type="text" />`;
+	duedate.innerHTML = `<input onblur=addItemToList(${list_item_count}) type="text" />`;
 
-	add_task.removeAttribute("onclick");
-	add_task.querySelector("input").focus();
+	taskname.removeAttribute("onclick");
+	taskname.querySelector("input").focus();
 }
 
 function addItemToList() {
-	const item_status = document.querySelector(".status .plus");
-	const add_task = document.querySelector(".taskname .plus");
-	const add_due_date = document.querySelector(".duedate .plus");
+	const buttons = document.querySelector(".buttons .plus");
+	const status = document.querySelector(".status .plus");
+	const taskname = document.querySelector(".taskname .plus");
+	const duedate = document.querySelector(".duedate .plus");
 	const inputs = document.querySelectorAll("input");
 	const value = inputs[0].value.trim();
 
 	if (!value) {
-		add_task.setAttribute("onclick", "getInput()");
-		add_task.innerHTML = "➕";
-		add_due_date.innerHTML = "";
+		taskname.setAttribute("onclick", "getInput()");
+		taskname.innerHTML = "➕";
+		duedate.innerHTML = "";
 		return;
 	}
 
-	// update list item
 	list_item_count++;
-	add_task.innerText = `${inputs[0].value}`;
-	add_due_date.innerText = `${inputs[1].value}`;
 
-	item_status.setAttribute("onclick", "updateStatusOfItem()");
-	item_status.innerHTML = `
-        <img src="${posibl_status[0]}" 
+	// update 'plus' content
+	buttons.innerHTML += `
+        <button>
+            <img src="../img/delete.png" />
+        </button>
+        <button>
+            <img src="../img/pencil.png" />
+        </button>
+    `;
+	taskname.innerText = `${inputs[0].value}`;
+	status.setAttribute("onclick", `updateStatusOfItem(${list_item_count})`);
+	status.innerHTML = `
+        <img src="${img_srcs[0]}" 
              alt="${status_alt[0]}"
-             title="${status_alt[0]}" />`;
+             title="${status_alt[0]}" />
+    `;
+	duedate.innerText = `${inputs[1].value}`;
+
+	// update class
+	const plus_item = document.querySelectorAll(".plus");
+	plus_item[0].className = `item n${list_item_count} butt`;
+	plus_item[1].className = `item n${list_item_count} stat_img`;
+	plus_item[2].className = `item n${list_item_count}`;
+	plus_item[3].className = `item n${list_item_count}`;
 
 	// add new 'plus' item
-	const cols = document.querySelectorAll(".plus");
-	cols[0].className = `stat_img item n${list_item_count}`;
-	cols[1].className = `item n${list_item_count}`;
-	cols[2].className = `item n${list_item_count}`;
+	const columns = document.querySelectorAll(".column");
+	columns[0].innerHTML += '<li class="plus"></li>';
+	columns[1].innerHTML += '<li class="plus"></li>';
+	columns[2].innerHTML += '<li class="plus" onclick="getInput()">➕</li>';
+	columns[3].innerHTML += '<li class="plus"></li>';
 
-	document.querySelectorAll(".column").forEach((column, cnt = 0) => {
-		if (++cnt == 2) {
-			column.innerHTML += '<li class="plus" onclick="getInput()">➕</li>';
-		} else {
-			column.innerHTML += '<li class="plus"></li>';
-		}
-	});
-
+	addEventListenersToItems();
+    
+	console.debug("before add: ", localStorage);
 	localStorage.setItem(
 		list_item_count,
-		JSON.stringify([
-			posibl_status[++curr_status % 3],
-			inputs[0].value,
-			inputs[1].value,
-		])
+		JSON.stringify([img_srcs[0], inputs[0].value, inputs[1].value])
 	);
+	console.debug("after add: ", localStorage);
 }
 
-function deleteItemInList(item_no) {
-	document.querySelector(`.item.n${item_no}`).innerHTML = "";
-	localStorage.removeItem(item_no);
+function deleteItemInList(list_item_count) {
+	document.querySelector(`.item.n${list_item_count}`).innerHTML = "";
+	localStorage.removeItem(list_item_count);
 }
 
-function editItemInList(item_no) {
-	const item = document.querySelector(`.item_${item_no}`);
-	const task_name = document.querySelector(
-		`.item_${item_no} .task_name`
+function editItemInList(list_item_count) {
+	const item = document.querySelector(`.item_${list_item_count}`);
+	const taskname = document.querySelector(
+		`.item_${list_item_count} .taskname`
 	).textContent;
 	const due_date = document.querySelector(
-		`.item_${item_no} .due_date`
+		`.item_${list_item_count} .due_date`
 	).textContent;
 
 	item.innerHTML = `
         <span class="status"></span>
-        <span class="task_name">
-            <input id="task_name"
+        <span class="taskname">
+            <input id="taskname"
                 type="text"
-                value="${task_name}">
+                value="${taskname}">
         </span>
         <span class="due_date">
             <input id="due_date"
                 type="text"
                 value="${due_date}" 
-                onblur="updateItemInList(${item_no}, '${task_name}')">
+                onblur="updateItemInList(${list_item_count}, '${taskname}')">
         </span>
     `;
 
-	document.querySelector("input#task_name").focus();
+	document.querySelector("input#taskname").focus();
 }
 
-function updateItemInList(item_no, task_name) {
-	const item = document.querySelector(`.item_${item_no}`);
+function updateItemInList(list_item_count, taskname) {
+	const item = document.querySelector(`.item_${list_item_count}`);
 	const inputs = document.querySelectorAll("input");
 
-	inputs[0].value = inputs[0].value.trim() ? inputs[0].value : task_name;
+	inputs[0].value = inputs[0].value.trim() ? inputs[0].value : taskname;
 
-	item.innerHTML = `
-        <span class="edit">
-            <button id="delete">
-                <img src="/img/delete.png"
-                    onclick="deleteItemInList(${item_no})">
-            </button>
-            <button id="edit">
-                <img src="/img/pencil.png"
-                    onclick="editItemInList(${item_no})">
-            </button>
-        </span>
-        <span class="status"
-            onclick="changeStatusOfItem(${item_no})">
-        </span>
-        <span class="task_name">${inputs[0].value}</span>
-        <span class="due_date">${inputs[1].value}</span>
-    `;
+	item.innerHTML = `    `;
 
 	localStorage.setItem(
-		item_no,
+		list_item_count,
 		JSON.stringify([
-			posibl_status[curr_status % 3],
+			img_srcs[curr_status_no % 3],
 			inputs[0].value,
 			inputs[1].value,
 		])
 	);
 }
 
-function updateStatusOfItem() {
-    const ul = document.querySelector(".status")
-	const item_status = document.querySelector(
-		`.stat_img.item.n${list_item_count}`
-	);
-	const add_task = document.querySelector(
-		`.taskname .item.n${list_item_count}`
-	);
+function updateStatusOfItem(n) {
+	const status = document.querySelector(`.status .item.n${n}`);
+	const taskname = document.querySelector(`.taskname .item.n${n}`);
+	let curr_status_no = img_srcs.indexOf(JSON.parse(localStorage[n])[0]);
+	curr_status_no = ++curr_status_no % 3;
 
-	curr_status = ++curr_status % 3;
-	item_status.innerHTML = `
-        <img src="${posibl_status[curr_status]}" 
-             alt="${status_alt[curr_status]}"
-             title="${status_alt[curr_status]}" />`;
+	status.innerHTML = `
+        <img src="${img_srcs[curr_status_no]}" 
+             alt="${status_alt[curr_status_no]}"
+             title="${status_alt[curr_status_no]}" />`;
 
-	if (curr_status % 3 === 2) {
-		add_task.style.textDecoration = "line-through";
+	if (curr_status_no % 3 === 2) {
+		taskname.style.textDecoration = "line-through";
 	} else {
-		add_task.style.textDecoration = "none";
+		taskname.style.textDecoration = "none";
 	}
 
-	// console.log(localStorage);
-	// let string_arr = localStorage.item_no;
-	// let arr = JSON.parse(string_arr);
+	let toopus = JSON.parse(localStorage.getItem(`${n}`));
+	toopus[0] = img_srcs[curr_status_no];
+	localStorage.setItem(n, JSON.stringify(toopus));
 
-	// arr[0] = posibl_status[curr_status % 3];
-	// localStorage.setItem(item_no, JSON.stringify([arr]));
+	console.debug("curr status = ", localStorage.getItem(`${n}`));
 }
 
-function loadItems() {
-	list_item_count++;
-	todolist.innerHTML += `
-        <span class="edit">
-            <button id="delete">
-                <img src="/img/delete.png"
-                    onclick="deleteItemInList(${item_no})">
-            </button>
-            <button id="edit">
-                <img src="/img/pencil.png"
-                    onclick="editItemInList(${item_no})">
-            </button>
-        </span>
-        <span class="status"
-            onclick="changeStatusOfItem(${item_no})">
-        </span>
-        <span class="task_name">${inputs[0].value}</span>
-        <span class="due_date">${inputs[1].value}</span>
-    `;
+function addButtons(n) {
+	const goobus = document.querySelector(".buttons");
+
+	for (let cnt = 0; cnt < n; cnt++) {
+		const li = document.createElement("li");
+		const del_button = document.createElement("button");
+		const edit_button = document.createElement("button");
+		const del_button_img = document.createElement("img");
+		const edit_button_img = document.createElement("img");
+
+		del_button_img.setAttribute("src", "../img/delete.png");
+		edit_button_img.setAttribute("src", "../img/pencil.png");
+
+		li.className = `item n${cnt + 1} butt`;
+		goobus.appendChild(li);
+
+		li.appendChild(del_button);
+		li.appendChild(edit_button);
+		del_button.appendChild(del_button_img);
+		edit_button.appendChild(edit_button_img);
+	}
+}
+
+function loadItemsIntoList() {
+	const columns = document.querySelectorAll(`.column`);
+	let key = 0;
+
+	for (const _ in localStorage) {
+		list_item_count++;
+		key++;
+		if (Object.hasOwnProperty.call(localStorage, _)) {
+			const item_arr = JSON.parse(localStorage[key]);
+			const stat_naem = status_alt[img_srcs.indexOf(item_arr[0])];
+			console.debug(key, "item_arr: ", item_arr);
+
+			const curr_stotus = img_srcs.indexOf(item_arr[0]);
+			const txt_dec = curr_stotus == 2 ? "line-through" : "none";
+
+			columns[0].innerHTML += `
+                <li class="item n${list_item_count} butt">
+                    <button>
+                        <img src="../img/delete.png" />
+                    </button>
+                    <button>
+                        <img src="../img/pencil.png" />
+                    </button>
+                </li>
+            `;
+			columns[1].innerHTML += `
+                <li class="item n${list_item_count} stat_img"
+                    onclick=updateStatusOfItem(${list_item_count})>
+                    <img src="${item_arr[0]}" 
+                        alt="${stat_naem}"
+                        title="${stat_naem}" />
+                </li>
+            `;
+			columns[2].innerHTML += `
+                <li class="item n${list_item_count}"
+                    style="text-decoration: ${txt_dec}">
+                    ${item_arr[1]}
+                </li>
+            `;
+			columns[3].innerHTML += `
+                <li class="item n${list_item_count}">
+                    ${item_arr[2]}
+                </li>
+            `;
+		}
+	}
+}
+
+function addEventListenersToItems() {
+	const list_items = document.querySelectorAll(".item");
+
+	list_items.forEach((li) => {
+		// console.debug("  li:", li);
+		li.addEventListener("mouseenter", (event) => {
+			const buttos = document.querySelector(
+				`.${event.target.classList[1]}.butt`
+			);
+			console.debug("  entert: ", buttos);
+			buttos.classList.add("iAmWhatTheyCallLegallyBlind");
+		});
+
+		li.addEventListener("mouseleave", (event) => {
+			const buttos = document.querySelector(
+				`.${event.target.classList[1]}.butt`
+			);
+			console.debug("  leavd: ", buttos);
+			buttos.classList.remove("iAmWhatTheyCallLegallyBlind");
+
+			console.debug("***************");
+		});
+	});
 }
 
 document.addEventListener("DOMContentLoaded", () => {
 	console.log("LOADED");
-
-	for (const item in localStorage) {
-		if (Object.hasOwnProperty.call(localStorage, item)) {
-			console.log(localStorage[item]);
-		}
+	if (localStorage.length) {
+		loadItemsIntoList();
 	}
+
+	const columns = document.querySelectorAll(`.column`);
+	columns[0].innerHTML += '<li class="plus"></li>';
+	columns[1].innerHTML += '<li class="plus"></li>';
+	columns[2].innerHTML += '<li class="plus" onclick="getInput()">➕</li>';
+	columns[3].innerHTML += '<li class="plus"></li>';
+
+	list_item_count = document.querySelectorAll(".column .item").length / 4;
+	console.debug("list_item_count = ", list_item_count);
+	console.log("DONE LOADED");
+
+	addEventListenersToItems();
 });
